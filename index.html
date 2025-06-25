@@ -125,18 +125,72 @@
             margin: 0 auto 20px;
         }
         
-        .owner-image {
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            max-width: 100%;
-            height: auto;
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: all 0.4s ease;
-            border: 5px solid white;
+        /* Enhanced Owner Image Container */
+        .owner-image-container {
+            position: relative;
+            max-width: 450px;
+            margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
-        
-        .owner-image:hover {
-            transform: perspective(1000px) rotateY(0deg);
+
+        .owner-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+            transition: all 0.5s ease;
+            transform: rotateY(-5deg);
+            border: 8px solid white;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .owner-image-container:hover .owner-image {
+            transform: rotateY(0deg);
+        }
+
+        .owner-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+            border: 5px solid white;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .owner-image-container:hover .owner-badge {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .badge-content {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .badge-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .badge-text {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            line-height: 1.2;
         }
         
         .gallery-section {
@@ -577,48 +631,226 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* CCTV Solutions Grid */
-        .cctv-solutions-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .cctv-solution-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .cctv-solution-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.2);
-        }
-        
-        .cctv-solution-img {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-        }
-        
-        .cctv-solution-content {
-            padding: 25px;
-        }
-        
-        .cctv-solution-content h3 {
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .cctv-solution-content p {
-            color: #64748b;
-            margin-bottom: 20px;
-        }
+       /* CCTV Solutions Grid - Full Image Cards */
+.cctv-solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.cctv-solution-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    aspect-ratio: 1/1; /* Makes cards square */
+    display: flex;
+    align-items: flex-end; /* Align content to bottom */
+}
+
+.cctv-solution-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    z-index: 1;
+}
+
+.cctv-solution-content {
+    position: relative;
+    z-index: 2;
+    padding: 25px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    width: 100%;
+    transform: translateY(100px);
+    transition: all 0.3s ease;
+}
+
+.cctv-solution-card:hover .cctv-solution-content {
+    transform: translateY(0);
+}
+
+.cctv-solution-card:hover .cctv-solution-img {
+    transform: scale(1.05);
+}
+
+.cctv-solution-content h3 {
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.cctv-solution-content p {
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+   
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transition-delay: 0.1s;
+}
+
+.cctv-solution-card:hover .cctv-solution-content p {
+    opacity: 1;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    /* Hero Section */
+    .hero {
+        padding: 80px 0 40px;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.4;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        margin: 15px auto 20px;
+    }
+    
+    /* Services Section */
+    .service-card {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+    
+    /* About Section */
+    .owner-image-container {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+    
+    .owner-badge {
+        width: 100px;
+        height: 100px;
+        bottom: -15px;
+        right: -15px;
+    }
+    
+    .badge-number {
+        font-size: 1.5rem;
+    }
+    
+    /* CCTV Solutions Grid */
+    .cctv-solution-card {
+        aspect-ratio: 3/4;
+    }
+    
+    .cctv-solution-content {
+        padding: 15px;
+    }
+    
+    .cctv-solution-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    /* Contact Section */
+    .contact-form {
+        padding: 20px 15px;
+    }
+    
+    .form-control, .form-select {
+        padding: 12px;
+    }
+    
+    .contact-info-box {
+        padding: 15px;
+    }
+    
+    .contact-info-box h5 {
+        font-size: 1.1rem;
+        padding-left: 35px;
+    }
+    
+    .contact-info-box p {
+        padding-left: 35px;
+        font-size: 0.9rem;
+    }
+    
+    /* Footer */
+    .footer {
+        padding: 50px 0 20px;
+    }
+    
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        margin-right: 10px;
+    }
+    
+    /* Navigation */
+    .navbar-brand img {
+        height: 35px;
+    }
+    
+    /* General adjustments */
+    .section-container {
+        padding: 50px 0;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 40px;
+    }
+    
+    .section-title:after {
+        width: 60px;
+        height: 4px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* Stats boxes */
+    .stats-box .display-4 {
+        font-size: 1.8rem;
+    }
+    
+    /* Map container */
+    .map-container {
+        height: 200px;
+    }
+    
+    /* Form elements */
+    .form-label {
+        font-size: 0.95rem;
+    }
+}
+@media (max-width: 992px) {
+    .cctv-solutions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+   .cctv-solutions-grid {
+        grid-template-columns: 1fr;
+    }
+     .cctv-solution-card {
+        aspect-ratio: 3/4; /* More rectangular on mobile */
+    }
+    
+    .cctv-solution-img-container {
+        height: 200px;
+    }
+}
         
         /* Menu Animation */
         .nav-link {
@@ -679,6 +911,29 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+        @media (max-width: 360px) {
+    /* Extra small devices */
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .contact-info-box h5 {
+        font-size: 1rem;
+    }
+    
+    .contact-info-box p {
+        font-size: 0.85rem;
+    }
+    
+    .navbar-brand img {
+        height: 30px;
+    }
+}
+
         
         @media (max-width: 768px) {
             .hero {
@@ -749,10 +1004,6 @@
                 bottom: 10px;
             }
             
-            .cctv-full-slider .carousel-caption h3 {
-                font-size: 1.2rem;
-            }
-            
             .section-title {
                 font-size: 1.8rem;
                 margin-bottom: 50px;
@@ -818,39 +1069,38 @@
     </div>
 
     <!-- Navigation -->
-    <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container container-custom">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-            <div class="logo-container" style="background: white; padding: 15px 15px; border-radius: 15px; display: flex; align-items: center; height: 50px;">
-                <img src="logo.jpg" alt="DOT Technologie Logo" style="height: 45px; width:80px; margin-right: 10px;">
-                <span style="color: var(--dark); font-weight: 700; font-size: 1.2rem;"></span>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container container-custom">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="logo-container" style="background: white; padding: 15px 15px; border-radius: 15px; display: flex; align-items: center; height: 50px;">
+                    <img src="logo.jpg" alt="DOT Technologie Logo" style="height: 45px; width:80px; margin-right: 10px;">
+                    <span style="color: var(--dark); font-weight: 700; font-size: 1.2rem;"></span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#about">Our Story</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#cctv">Our Prodect</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
             </div>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item mx-2">
-                    <a class="nav-link active" href="#home">Home</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="#services">Services</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="#about">Our Story</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="#cctv">CCTV Solutions</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero text-center">
@@ -964,13 +1214,19 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Section with Enhanced Owner Image -->
     <section id="about" class="section-container">
         <div class="container container-custom">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0 fade-in">
-                    <div class="p-4">
-                        <img src="sagar.jpg" alt="Sagar - Owner of DOT Technologie" class="owner-image img-fluid floating">
+                    <div class="owner-image-container">
+                        <img src="sagar.jpg" alt="Sagar - Owner of DOT Technologie" class="owner-image img-fluid">
+                        <div class="owner-badge">
+                            <div class="badge-content">
+                                <span class="badge-number">8+</span>
+                                <span class="badge-text">Years Experience</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 fade-in">
@@ -991,105 +1247,104 @@
         </div>
     </section>
 
-    <!-- CCTV Solutions Section -->
-    <section id="cctv" class="section-container bg-light">
-        <div class="container container-custom">
-            <h2 class="section-title fade-in">CCTV Solutions</h2>
-            <p class="text-center mb-5 fade-in">Comprehensive security solutions tailored to your needs</p>
+  <!-- CCTV Solutions Section -->
+<section id="cctv" class="section-container bg-light">
+    <div class="container container-custom">
+        <h2 class="section-title fade-in">Our Prodect</h2>
+       
+        <div class="cctv-solutions-grid fade-in">
+            <!-- Card 1 -->
+            <div class="cctv-solution-card">
+                <img src="prodect 1.jpg" alt="Dome CCTV" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>GEFORCE GT 710</h3><BR>
+                    
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
+                </div>
+            </div>
             
-            <div class="cctv-solutions-grid fade-in">
-                <!-- Card 1 -->
-                <div class="cctv-solution-card">
-                    <img src="prodect 1.jpg" alt="Dome CCTV" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3></h3>
-                        <p></p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
+            <!-- Card 2 -->
+            <div class="cctv-solution-card">
+                <img src="project 2.jpg" alt="Bullet CCTV" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>Mantra MFS110 - L1</h3><BR>
+                    
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
                 </div>
-                
-                <!-- Card 2 -->
-                <div class="cctv-solution-card">
-                    <img src="project 2.jpg" alt="Bullet CCTV" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3></h3>
-                        <p></p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="cctv-solution-card">
+                <img src="PRODECT 3.jpg" alt="PTZ Cameras" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>FM220U L1 SCANNER</h3><BR>
+                    
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
                 </div>
-                
-                <!-- Card 3 -->
-                <div class="cctv-solution-card">
-                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="PTZ Cameras" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3>PTZ Cameras</h3>
-                        <p>Pan-tilt-zoom cameras offering maximum coverage and flexible monitoring with remote control.</p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="cctv-solution-card">
+                <img src="prodect4.avif" alt="Wireless CCTV" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>CCTV Systems</h3><br>
+                   
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
                 </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="cctv-solution-card">
+                <img src="prodectr 5.webp" alt="IP CCTV" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>Smartface Seriesl</h3><br>
                 
-                <!-- Card 4 -->
-                <div class="cctv-solution-card">
-                    <img src="https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Wireless CCTV" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3>Wireless CCTV Systems</h3>
-                        <p>Easy installation with no wiring required, featuring remote access and mobile monitoring.</p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
                 </div>
-                
-                <!-- Card 5 -->
-                <div class="cctv-solution-card">
-                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="IP CCTV" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3>IP Network Cameras</h3>
-                        <p>High-resolution digital cameras with advanced analytics and crystal clear imaging.</p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="cctv-solution-card">
+                <img src="prodect6.jpeg" alt="NVR Systems" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>Pc Building </h3>
+<br>                    
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
                 </div>
-                
-                <!-- Card 6 -->
-                <div class="cctv-solution-card">
-                    <img src="https://images.unsplash.com/photo-1581093057305-5e69b1f6a8c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="NVR Systems" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3>NVR Systems</h3>
-                        <p>Network Video Recorders for high-quality video storage and management with remote access.</p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
+            </div>
+            
+            <!-- Card 7 -->
+            <div class="cctv-solution-card">
+                <img src="prodect7.png" alt="HD Analog" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>Laptop's</h3><br>
+                    
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
                 </div>
-                
-                <!-- Card 7 -->
-                <div class="cctv-solution-card">
-                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="HD Analog" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3>HD Analog Systems</h3>
-                        <p>Cost-effective HD analog cameras with excellent image quality for budget-conscious solutions.</p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
+            </div>
+            
+            <!-- Card 8 -->
+            <div class="cctv-solution-card">
+                <img src="prodect8.jpg" alt="Thermal Cameras" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>H610m Gaming Wifi DDR4</h3><BR>
+                    
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
                 </div>
-                
-                <!-- Card 8 -->
-                <div class="cctv-solution-card">
-                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Thermal Cameras" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3>Thermal Cameras</h3>
-                        <p>Advanced thermal imaging for perimeter protection and low-light/no-light conditions.</p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
-                </div>
-                
-                <!-- Card 9 -->
-                <div class="cctv-solution-card">
-                    <img src="https://images.unsplash.com/photo-1581093057305-5e69b1f6a8c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Smart Detection" class="cctv-solution-img">
-                    <div class="cctv-solution-content">
-                        <h3>Smart Detection Systems</h3>
-                        <p>AI-powered cameras with motion detection, facial recognition, and intrusion alerts.</p>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
-                    </div>
+            </div>
+            
+            <!-- Card 9 -->
+            <div class="cctv-solution-card">
+                <img src="PRODECT9.webp" alt="Smart Detection" class="cctv-solution-img">
+                <div class="cctv-solution-content">
+                    <h3>SiS Smart I</h3><br>
+                   
+                    <a href="#contact" class="btn btn-primary">Get Quote</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Enhanced Contact Section -->
     <section id="contact" class="contact-section">
@@ -1160,12 +1415,12 @@
                         
                         <div class="contact-info-box">
                             <h5><i class="fas fa-phone"></i> Call Us</h5>
-                            <p>+91 91677 37367<br>+91 84465 64036</p>
+                            <p>+91 91677 37367<br>
                         </div>
                         
                         <div class="contact-info-box">
                             <h5><i class="fas fa-envelope"></i> Email Us</h5>
-                            <p>dotttechnologies6199@gmail.com</p>
+                            <p>Dottechnologies6199@gmail.com</p>
                         </div>
                         
                         <div class="contact-info-box">
@@ -1193,7 +1448,7 @@
                     <p class="mb-4">Your trusted partner for all computer, laptop, and security system needs in Bhayandar and surrounding areas.</p>
                     <div class="mt-4 mb-5">
                       
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/dot_technologie_/" class="social-icon"><i class="fab fa-instagram"></i></a>
                       
                     </div>
                     
